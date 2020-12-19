@@ -6,76 +6,61 @@ class MY_Controller extends CI_Controller {
 
     protected $data = array();
 
-    public function __construct()
-    {
+    public function __construct() {
        parent::__construct();
+       $this->load->model(
+            array(
+                'user'
+            )
+        );
     }
 
 }
 
 class User_Controller extends MY_Controller {
-
-    public function __construct() 
-    {
+    public function __construct() {
         parent::__construct();
-        if(!$this->session->userdata('id'))
-        {
-            $this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER,  "Anda Harus Login"));
-            redirect(site_url());
+        if(!$this->session->userdata('id')) {
+            $this->session->set_flashdata('alertSweet', $this->alert->sweetAlert(Alert::ERROR, "Gagal!", "Anda Harus Login", "false"));
+			redirect(site_url());
   	    }
     }
-
 }
 
-class Major_Controller extends User_Controller {
-
-    public function __construct()
-    {
+class Admin_Controller extends User_Controller {
+    public function __construct() {
         parent::__construct();
-        if($this->session->userdata('role') != 3)
-        {
-    		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, "Anda Tidak Berhak Masuk Kehalaman Ini"));
+        if($this->session->userdata('role') != User::ADMIN_ROLE) {
+            $this->session->set_flashdata('alertSweet', $this->alert->sweetAlert(Alert::ERROR, "Gagal!", "Halaman ini tidak dapat anda akses", "false"));
     		redirect(site_url());
         }
     }
-
 }
 
 class Staff_Controller extends User_Controller {    
-
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        if($this->session->userdata('role') != 2)
-        {
-    		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, "Anda Tidak Berhak Masuk Kehalaman Ini"));
+        if($this->session->userdata('role') != User::THERAPIST_ROLE) {
+            $this->session->set_flashdata('alertSweet', $this->alert->sweetAlert(Alert::ERROR, "Gagal!", "Halaman ini tidak dapat anda akses", "false"));
     		redirect(site_url());
         }
     }
-
 }
 
 class CoRector_Controller extends User_Controller {    
-
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
-        if($this->session->userdata('role') != 1)
-        {
-    		$this->session->set_flashdata('alert', $this->alert->set_alert( Alert::DANGER, "Anda Tidak Berhak Masuk Kehalaman Ini"));
+        if($this->session->userdata('role') != User::CHILD_ROLE) {
+            $this->session->set_flashdata('alertSweet', $this->alert->sweetAlert(Alert::ERROR, "Gagal!", "Halaman ini tidak dapat anda akses", "false"));
     		redirect(site_url());
         }
     }
-
 }
 
 class Public_Controller extends MY_Controller {
-
-    function __construct()
-    {
+    function __construct() {
 		parent::__construct();
     }
-
 }
 
 ?>

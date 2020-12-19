@@ -2,14 +2,16 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Home extends Admin_Controller {
 
 	public function index()	{
-
+		
 		$this->load->view('includes/header');
 		$this->load->view('includes/sidebar');
-		$this->load->view('pages/home');
+		$this->load->view('pages/admin/home');
 		$this->load->view('includes/footer');
 
 	}
 }
+
+?>

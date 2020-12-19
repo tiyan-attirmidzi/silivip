@@ -20,8 +20,10 @@
     <!-- CSS -->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendors/styles/core.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendors/styles/icon-font.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+	<?php if ($this->uri->segment(2) == 'childs' || $this->uri->segment(2) == 'therapists') { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/src/plugins/datatables/css/dataTables.bootstrap4.min.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/src/plugins/datatables/css/responsive.bootstrap4.min.css">
+    <?php } ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/vendors/styles/style.css">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
@@ -63,15 +65,15 @@
 				<div class="dropdown">
 					<a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
 						<span class="user-icon">
-							<img src="<?php echo base_url(); ?>assets/vendors/images/photo1.jpg" alt="">
+							<img src="<?php echo $this->session->userdata("image") ?>" alt="">
 						</span>
-						<span class="user-name">Ross C. Lopez</span>
+						<span class="user-name"><?php echo $this->session->userdata("name")?></span>
 					</a>
 					<div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
 						<a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
 						<a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
-						<a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+						<a class="dropdown-item" href="<?php echo base_url("logout") ?>"><i class="dw dw-logout"></i> Keluar</a>
 					</div>
 				</div>
 			</div>
