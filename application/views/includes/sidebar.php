@@ -27,7 +27,7 @@
 						</a>
 					</li>
                     <li>
-						<a href="javascript:;" class="dropdown-toggle no-arrow">
+						<a href="<?php echo base_url('admin/videos'); ?>" class="dropdown-toggle no-arrow <?php if($this->uri->segment(2)=='videos'){ echo "active"; }; ?>">
 							<span class="micon dw dw-video-player"></span><span class="mtext">Upload Media</span>
 						</a>
 					</li>
